@@ -77,7 +77,12 @@ bool SyntaxChecker::visit(PragmaDirective const& _pragma)
 		if (literals.size() == 0)
 			m_errorReporter.syntaxError(
 				_pragma.location(),
-				"At least one experimental feature or the wildcard symbol \"*\" is required."
+				"Experimental feature name is missing."
+			);
+		else if (literals.size() > 1)
+			m_errorReporter.syntaxError(
+				_pragma.location(),
+				"Stray arguments."
 			);
 		else
 		{
